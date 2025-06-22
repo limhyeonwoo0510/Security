@@ -1,3 +1,5 @@
+import pandas as pd
+import matplotlib as plt
 import streamlit as st
 from streamlit_option_menu import option_menu
 from utils import search_naver_news
@@ -27,6 +29,48 @@ if selected == "보안이란?":
 
     정보 보안은 일상생활의 필수 요소이며, 안전한 비밀번호 사용, 보안 소프트웨어 설치, 2단계 인증 등이 중요합니다.
     """)
+    
+    df = pd.read_csv("경찰청_연도별 사이버 범죄 통계 현황_20200831.csv", encoding="cp949")
+    df_occurrence = df[df["구분"] == "발생건수"]
+    
+    # 필요한 열만 선택
+    columns_to_plot = [
+        "연도",
+        "해킹(계정도용)",
+        "해킹(단순침입)",
+        "악성프로그램(기타)",
+        "사이버 명예훼손(모욕)",
+        "사이버 음란물(아동음란물)"
+    ]
+    df_chart = df_occurrence[columns_to_plot].sort_values("연도")
+
+    # 그래프 그리기
+    def draw_bar_chart(df):
+        plt.rcParams['font.family'] = 'Malgun Gothic'  # Windows 한글 폰트
+        plt.rcParams['axes.unicode_minus'] = False
+        
+        years = df['연도']
+        x = range(len(years))
+        bar_width = 0.15
+    
+        fig, ax = plt.subplots(figsize=(12, 6))
+    
+        for i, col in enumerate(df.columns[1:]):
+            ax.bar(
+                [pos + i * bar_width for pos in x],
+                df[col],
+                width=bar_width,
+                label=col
+            )
+    
+        ax.set_xticks([pos + bar_width * 2 for pos in x])
+        ax.set_xticklabels(years)
+        ax.set_xlabel("연도")
+        ax.set_ylabel("발생 건수")
+        ax.set_title("연도별 사이버 범죄 발생 추이")
+        ax.legend()
+        plt.tight_layout()
+        return fig
 
 # 페이지 2: 보안 관련 뉴스
 elif selected == "보안 관련 뉴스":
