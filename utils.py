@@ -35,8 +35,6 @@ def draw_bar_chart(df):
     font_path = "NanumGothic-Regular.ttf"  # 경로 맞게 조정
     font_name = font_manager.FontProperties(fname=font_path).get_name()
     plt.rc('font', family=font_name)
-    font_prop = font_manager.FontProperties(fname=font_path)
-    plt.rcParams['font.family'] = font_prop.get_name()
 
     years = df['연도']
     x = range(len(years))
