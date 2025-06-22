@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 def search_naver_news(query="보안", num_results=5):
     search_url = f"https://search.naver.com/search.naver?where=news&query={query}"
     
-    response = requests.get(url)
+    response = requests.get(search_url)
 
     soup = BeautifulSoup(response.text, "html.parser")
     results = []
