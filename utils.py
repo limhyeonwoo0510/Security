@@ -25,3 +25,31 @@ def search_naver_news(query="보안", num_results=5):
             results.append({"title": title, "link": link})
 
     return results
+
+# 그래프 그리기
+def draw_bar_chart(df):
+    plt.rcParams['font.family'] = 'Malgun Gothic'  # Windows 한글 폰트
+    plt.rcParams['axes.unicode_minus'] = False
+    
+    years = df['연도']
+    x = range(len(years))
+    bar_width = 0.15
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    for i, col in enumerate(df.columns[1:]):
+        ax.bar(
+            [pos + i * bar_width for pos in x],
+            df[col],
+            width=bar_width,
+            label=col
+        )
+
+    ax.set_xticks([pos + bar_width * 2 for pos in x])
+    ax.set_xticklabels(years)
+    ax.set_xlabel("연도")
+    ax.set_ylabel("발생 건수")
+    ax.set_title("연도별 사이버 범죄 발생 추이")
+    ax.legend()
+    plt.tight_layout()
+    return fig
