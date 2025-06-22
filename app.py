@@ -29,8 +29,6 @@ if selected == "보안이란?":
         "해킹(계정도용)",
         "해킹(단순침입)",
         "악성프로그램(기타)",
-        "사이버 명예훼손(모욕)",
-        "사이버 음란물(아동음란물)"
     ]
     df_chart = df_occurrence[columns_to_plot].sort_values("연도")
     
