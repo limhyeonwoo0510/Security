@@ -13,7 +13,7 @@ def search_naver_news(query="보안", num_results=5):
     soup = BeautifulSoup(response.text, "html.parser")
     results = []
 
-    news_items = soup.select("ul.list_news > li")[:num_results]
+    news_items = soup.select("a.news_tit")[:num_results]
     for item in news_items:
         a_tag = item.select_one("a.news_tit")
         if a_tag:
