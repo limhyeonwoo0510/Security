@@ -56,6 +56,8 @@ if selected == "보안이란?":
     """)
     fig = draw_bar_chart(df_chart)
     st.pyplot(fig)
+    st.markdown("""
+    출처: 공공데이터포털-경찰청_연도별 사이버 범죄 통계 현황
     
     st.markdown("""
     #### 보안 범죄 증가 추세
