@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 
 def search_naver_news(query="보안", num_results=5):
     search_url = f"https://search.naver.com/search.naver?where=news&query={query}"
+    headers = {"User-Agent": "Mozilla/5.0"}
     
     response = requests.get(search_url)
 
@@ -15,10 +16,9 @@ def search_naver_news(query="보안", num_results=5):
 
     news_items = soup.select("a.news_tit")[:num_results]
     for item in news_items:
-        a_tag = item.select_one("a.news_tit")
-        if a_tag:
-            title = a_tag.get("title")
-            link = a_tag.get("href")
+        title = item.get("title")
+        link = item.get("href")
+        if title and link:
             results.append({"title": title, "link": link})
 
     return results
