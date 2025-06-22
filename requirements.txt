@@ -2,3 +2,5 @@ streamlit
 streamlit-option-menu
 requests
 beautifulsoup4
+pandas
+matplotlib
