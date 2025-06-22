@@ -44,6 +44,7 @@ if selected == "보안이란?":
 
     정보 보안은 일상생활의 필수 요소이며, 안전한 비밀번호 사용, 보안 소프트웨어 설치, 2단계 인증 등이 중요합니다.
     """)
+    st.subheader("📊 연도별 사이버 범죄 발생 추이")
     fig = draw_bar_chart(df_chart)
     st.pyplot(fig)
 
