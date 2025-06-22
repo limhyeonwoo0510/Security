@@ -32,7 +32,7 @@ def search_naver_news(query="보안", num_results=5):
 
 # 그래프 그리기
 def draw_bar_chart(df):
-    font_path = "NanumGothic-Regular.ttf"  # 경로 맞게 조정
+    font_path = ".\NanumGothic-Regular.ttf"  # 경로 맞게 조정
     if not os.path.exists(font_path):
         raise FileNotFoundError(f"폰트 파일을 찾을 수 없습니다: {font_path}")
 
