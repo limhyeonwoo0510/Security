@@ -14,10 +14,12 @@ def search_naver_news(query="보안", num_results=5):
     soup = BeautifulSoup(response.text, "html.parser")
     results = []
 
-    news_items = soup.select("a.news_tit")[:num_results]
-    for item in news_items:
-        title = item.get("title")
-        link = item.get("href")
+    news_items = soup.select("a > span.sds-comps-text-type-headline1")[:num_results]
+    results = []
+    
+    for span in news_items:
+        title = span.get_text(strip=True)
+        link = span.parent.get("href")  # 부모 a 태그의 href
         if title and link:
             results.append({"title": title, "link": link})
 
