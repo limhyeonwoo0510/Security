@@ -3,6 +3,7 @@ import matplotlib as plt
 import streamlit as st
 from streamlit_option_menu import option_menu
 from utils import search_naver_news
+from utils import draw_bar_chart
 
 # 앱 설정
 st.set_page_config(page_title="보안 교육 웹앱", layout="centered")
@@ -19,17 +20,6 @@ with st.sidebar:
 
 # 페이지 1: 보안이란?
 if selected == "보안이란?":
-    st.title("🔐 보안이란 무엇인가?")
-    st.markdown("""
-    보안(Security)은 정보 자산을 외부의 위협으로부터 안전하게 보호하는 활동입니다.
-
-    - **기밀성(Confidentiality)**: 허가되지 않은 접근으로부터 정보를 보호합니다.
-    - **무결성(Integrity)**: 정보가 변경되거나 손상되지 않도록 합니다.
-    - **가용성(Availability)**: 정당한 사용자가 언제든 정보에 접근할 수 있도록 보장합니다.
-
-    정보 보안은 일상생활의 필수 요소이며, 안전한 비밀번호 사용, 보안 소프트웨어 설치, 2단계 인증 등이 중요합니다.
-    """)
-    
     df = pd.read_csv("경찰청_연도별 사이버 범죄 통계 현황_20200831.csv", encoding="cp949")
     df_occurrence = df[df["구분"] == "발생건수"]
     
@@ -43,34 +33,19 @@ if selected == "보안이란?":
         "사이버 음란물(아동음란물)"
     ]
     df_chart = df_occurrence[columns_to_plot].sort_values("연도")
+    
+    st.title("🔐 보안이란 무엇인가?")
+    st.markdown("""
+    보안(Security)은 정보 자산을 외부의 위협으로부터 안전하게 보호하는 활동입니다.
 
-    # 그래프 그리기
-    def draw_bar_chart(df):
-        plt.rcParams['font.family'] = 'Malgun Gothic'  # Windows 한글 폰트
-        plt.rcParams['axes.unicode_minus'] = False
-        
-        years = df['연도']
-        x = range(len(years))
-        bar_width = 0.15
-    
-        fig, ax = plt.subplots(figsize=(12, 6))
-    
-        for i, col in enumerate(df.columns[1:]):
-            ax.bar(
-                [pos + i * bar_width for pos in x],
-                df[col],
-                width=bar_width,
-                label=col
-            )
-    
-        ax.set_xticks([pos + bar_width * 2 for pos in x])
-        ax.set_xticklabels(years)
-        ax.set_xlabel("연도")
-        ax.set_ylabel("발생 건수")
-        ax.set_title("연도별 사이버 범죄 발생 추이")
-        ax.legend()
-        plt.tight_layout()
-        return fig
+    - **기밀성(Confidentiality)**: 허가되지 않은 접근으로부터 정보를 보호합니다.
+    - **무결성(Integrity)**: 정보가 변경되거나 손상되지 않도록 합니다.
+    - **가용성(Availability)**: 정당한 사용자가 언제든 정보에 접근할 수 있도록 보장합니다.
+
+    정보 보안은 일상생활의 필수 요소이며, 안전한 비밀번호 사용, 보안 소프트웨어 설치, 2단계 인증 등이 중요합니다.
+    """)
+    fig = draw_bar_chart(df_chart)
+    st.pyplot(fig)
 
 # 페이지 2: 보안 관련 뉴스
 elif selected == "보안 관련 뉴스":
