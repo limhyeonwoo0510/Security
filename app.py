@@ -101,7 +101,7 @@ elif selected == "보안 자가진단":
         score += 1
     if st.checkbox("✔️ 2단계 인증(2FA)을 사용한다."):
         score += 1
-    if st.checkbox("✔️ 공용 Wi-Fi 사용 시 VPN을 이용한다."):
+    if st.checkbox("✔️ 주기적으로 비밀번호를 변경한다."):
         score += 1
     if st.checkbox("✔️ 의심스러운 링크는 클릭하지 않는다."):
         score += 1
