@@ -7,15 +7,8 @@ from bs4 import BeautifulSoup
 
 def search_naver_news(query="보안", num_results=5):
     search_url = f"https://search.naver.com/search.naver?where=news&query={query}"
-    headers = {
-        "User-Agent": "Mozilla/5.0"
-    }
-
-    try:
-        response = requests.get(search_url, headers=headers, timeout=5)
-        response.raise_for_status()
-    except requests.exceptions.RequestException as e:
-        return []
+    
+    response = requests.get(url)
 
     soup = BeautifulSoup(response.text, "html.parser")
     results = []
