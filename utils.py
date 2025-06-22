@@ -38,6 +38,7 @@ def draw_bar_chart(df):
 
     font_name = font_manager.FontProperties(fname=font_path).get_name()
     rc('font', family=font_name)
+    plt.rcParams['font.family'] = font_prop.get_name()
 
     years = df['연도']
     x = range(len(years))
