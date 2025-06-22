@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib as plt
 import matplotlib.pyplot as plt
+from matplotlib import font_manager, rc
 import requests
 from bs4 import BeautifulSoup
 
@@ -31,6 +32,9 @@ def search_naver_news(query="보안", num_results=5):
 
 # 그래프 그리기
 def draw_bar_chart(df):
+    font_path = "./malgun.ttf"  # 프로젝트 내 폰트 파일 경로
+    font_name = font_manager.FontProperties(fname=font_path).get_name()
+    rc('font', family=font_name)
     
     years = df['연도']
     x = range(len(years))
