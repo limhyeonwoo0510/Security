@@ -28,7 +28,6 @@ def search_naver_news(query="보안", num_results=5):
 
 # 그래프 그리기
 def draw_bar_chart(df):
-    plt.rcParams['font.family'] = 'Malgun Gothic'  # Windows 한글 폰트
     plt.rcParams['axes.unicode_minus'] = False
     
     years = df['연도']
