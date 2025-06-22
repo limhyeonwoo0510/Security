@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib as plt
 import matplotlib.pyplot as plt
 from matplotlib import font_manager, rc
 import requests
@@ -32,10 +31,13 @@ def search_naver_news(query="보안", num_results=5):
 
 # 그래프 그리기
 def draw_bar_chart(df):
-    font_path = "NanumGothic-Regular.ttf"  # 프로젝트 내 폰트 파일 경로
+    font_path = "NanumGothic-Regular.ttf"  # 경로 맞게 조정
+    if not os.path.exists(font_path):
+        raise FileNotFoundError(f"폰트 파일을 찾을 수 없습니다: {font_path}")
+
     font_name = font_manager.FontProperties(fname=font_path).get_name()
     rc('font', family=font_name)
-    
+
     years = df['연도']
     x = range(len(years))
     bar_width = 0.15
@@ -50,7 +52,7 @@ def draw_bar_chart(df):
             label=col
         )
 
-    ax.set_xticks([pos + bar_width * 2 for pos in x])
+    ax.set_xticks([pos + bar_width * (len(df.columns[1:]) - 1) / 2 for pos in x])
     ax.set_xticklabels(years)
     ax.set_xlabel("연도")
     ax.set_ylabel("발생 건수")
